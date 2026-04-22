@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -e ".[dev]"
+          pip install -e ".[dev,vector]"
 
       - name: Run tests
         run: pytest --cov=memcore --cov-report=term-missing
