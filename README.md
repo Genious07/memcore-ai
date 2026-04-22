@@ -34,6 +34,12 @@ memcore is:
 pip install memcore
 ```
 
+With semantic vector search (downloads ~130MB embedding model on first use):
+
+```bash
+pip install "memcore[vector]"
+```
+
 With LLM-powered extraction (downloads Gemma ~800MB on first use):
 
 ```bash
@@ -74,6 +80,15 @@ import memcore
 mem = memcore.MemCore()
 mem.add("I am a Python developer. I love open source.")
 results = mem.search("developer")
+```
+
+### With semantic vector search (best recall)
+
+```python
+# pip install "memcore[vector]"
+mem = memcore.MemCore(use_vector=True)
+mem.add("I prefer concise explanations and dislike verbose output.")
+results = mem.search("communication style")  # matches semantically, not just by keyword
 ```
 
 ### With Gemma LLM extractor (best quality)

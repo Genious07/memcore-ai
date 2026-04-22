@@ -21,11 +21,13 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
-dependencies = [
-    "huggingface-hub>=0.20.0",
-]
+dependencies = []
 
 [project.optional-dependencies]
+vector = [
+    "sqlite-vec>=0.1.0",
+    "fastembed>=0.3.0",
+]
 llm = [
     "llama-cpp-python>=0.2.0",
     "huggingface-hub>=0.20.0",

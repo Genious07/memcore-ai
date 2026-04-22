@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from typing import List, Optional
 
@@ -14,6 +14,7 @@ class MemoryEntry:
     last_accessed: datetime
     access_count: int
     metadata: dict
+    embedding: Optional[List[float]] = field(default=None, repr=False)
 
 
 class BaseStorage(ABC):
@@ -24,7 +25,13 @@ class BaseStorage(ABC):
     def get(self, memory_id: str) -> Optional[MemoryEntry]: ...
 
     @abstractmethod
-    def search(self, query: str, layer: Optional[str] = None, limit: int = 10) -> List[MemoryEntry]: ...
+    def search(
+        self,
+        query: str,
+        query_embedding: Optional[List[float]] = None,
+        layer: Optional[str] = None,
+        limit: int = 10,
+    ) -> List[MemoryEntry]: ...
 
     @abstractmethod
     def delete(self, memory_id: str) -> None: ...
