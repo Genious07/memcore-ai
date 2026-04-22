@@ -1,18 +1,18 @@
-# memcore
+# memvault
 
-[![PyPI version](https://img.shields.io/pypi/v/memcore-ai.svg)](https://pypi.org/project/memcore-ai/)
-[![CI](https://github.com/Genious07/memcore-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/Genious07/memcore-ai/actions/workflows/ci.yml)
+[![PyPI version](https://img.shields.io/pypi/v/memvault-ai.svg)](https://pypi.org/project/memvault-ai/)
+[![CI](https://github.com/Genious07/memvault/actions/workflows/ci.yml/badge.svg)](https://github.com/Genious07/memvault/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://pypi.org/project/memcore-ai/)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://pypi.org/project/memvault-ai/)
 
 Open-source, model-agnostic memory layer for LLMs.
 
-Drop memcore into any LLM application to give it persistent, structured memory — no API key required, no infrastructure to run, no vendor lock-in.
+Drop memvault into any LLM application to give it persistent, structured memory — no API key required, no infrastructure to run, no vendor lock-in.
 
 ```python
-import memcore
+import memvault
 
-with memcore.MemCore() as mem:
+with memvault.MemCore() as mem:
     mem.add("My name is Alice. I prefer dark mode and I work in Python.")
     results = mem.search("programming preferences")
     for r in results:
@@ -21,11 +21,11 @@ with memcore.MemCore() as mem:
 
 ---
 
-## Why memcore?
+## Why memvault?
 
 Most LLM apps lose context between sessions. Vector databases are heavy to set up. Existing memory libraries tie you to a specific LLM or cloud service.
 
-memcore is:
+memvault is:
 - **Zero config** — SQLite storage, works out of the box
 - **Model agnostic** — plug in any LLM or use the built-in Gemma extractor
 - **Pure library** — no daemon, no background process, no ports
@@ -36,26 +36,26 @@ memcore is:
 ## Installation
 
 ```bash
-pip install memcore-ai
+pip install memvault-ai
 ```
 
 With semantic vector search (downloads ~130MB embedding model on first use):
 
 ```bash
-pip install "memcore-ai[vector]"
+pip install "memvault-ai[vector]"
 ```
 
 With LLM-powered extraction (downloads Gemma ~800MB on first use):
 
 ```bash
-pip install "memcore-ai[llm]"
+pip install "memvault-ai[llm]"
 ```
 
 ---
 
 ## Architecture
 
-memcore uses a **3-layer memory model** inspired by human cognition:
+memvault uses a **3-layer memory model** inspired by human cognition:
 
 | Layer | Description | Promoted when |
 |-------|-------------|---------------|
@@ -80,9 +80,9 @@ memcore uses a **3-layer memory model** inspired by human cognition:
 ### Default (rule-based extractor, no LLM needed)
 
 ```python
-import memcore
+import memvault
 
-mem = memcore.MemCore()
+mem = memvault.MemCore()
 mem.add("I am a Python developer. I love open source.")
 results = mem.search("developer")
 ```
@@ -90,8 +90,8 @@ results = mem.search("developer")
 ### With semantic vector search (best recall)
 
 ```python
-# pip install "memcore[vector]"
-mem = memcore.MemCore(use_vector=True)
+# pip install "memvault[vector]"
+mem = memvault.MemCore(use_vector=True)
 mem.add("I prefer concise explanations and dislike verbose output.")
 results = mem.search("communication style")  # matches semantically, not just by keyword
 ```
@@ -99,7 +99,7 @@ results = mem.search("communication style")  # matches semantically, not just by
 ### With Gemma LLM extractor (best quality)
 
 ```python
-mem = memcore.MemCore(use_llm=True)
+mem = memvault.MemCore(use_llm=True)
 # Downloads gemma-3-1b-it-Q4_K_M.gguf (~800MB) on first run
 mem.add("Long conversation text with lots of context...")
 ```
@@ -107,26 +107,26 @@ mem.add("Long conversation text with lots of context...")
 ### Bring your own LLM extractor
 
 ```python
-from memcore.extractors.base import BaseExtractor
+from memvault.extractors.base import BaseExtractor
 
 class MyExtractor(BaseExtractor):
     def extract(self, text: str) -> list[str]:
         # call OpenAI, Anthropic, Ollama, anything
         return ["fact 1", "fact 2"]
 
-mem = memcore.MemCore(extractor=MyExtractor())
+mem = memvault.MemCore(extractor=MyExtractor())
 ```
 
 ### Custom storage backend
 
 ```python
-from memcore.storage.base import BaseStorage
+from memvault.storage.base import BaseStorage
 
 class PostgresStorage(BaseStorage):
     # implement the interface
     ...
 
-mem = memcore.MemCore(storage=PostgresStorage())
+mem = memvault.MemCore(storage=PostgresStorage())
 ```
 
 ### Memory maintenance
@@ -154,8 +154,8 @@ mem.decay()         # decay and prune stale memories
 Contributions are welcome. Please open an issue before submitting large PRs.
 
 ```bash
-git clone https://github.com/Genious07/memcore-ai
-cd memcore
+git clone https://github.com/Genious07/memvault
+cd memvault
 pip install -e ".[dev,vector]"
 pytest
 ```

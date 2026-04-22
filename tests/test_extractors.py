@@ -1,4 +1,4 @@
-from memcore.extractors.rules import RulesExtractor
+from memvault.extractors.rules import RulesExtractor
 
 
 def test_extract_name():

@@ -14,7 +14,7 @@ from ..storage.sqlite import SQLiteStorage
 class MemCore:
     def __init__(
         self,
-        db_path: str = "memcore.db",
+        db_path: str = "memvault.db",
         extractor: Optional[BaseExtractor] = None,
         storage: Optional[BaseStorage] = None,
         embedder: Optional[BaseEmbedder] = None,

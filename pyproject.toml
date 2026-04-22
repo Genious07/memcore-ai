@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "memcore-ai"
+name = "memvault-ai"
 version = "0.1.0"
 description = "Open-source, model-agnostic memory layer for LLMs"
 readme = "README.md"
@@ -41,13 +41,13 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Genious07/memcore-ai"
-Repository = "https://github.com/Genious07/memcore-ai"
-Issues = "https://github.com/Genious07/memcore-ai/issues"
+Homepage = "https://github.com/Genious07/memvault"
+Repository = "https://github.com/Genious07/memvault"
+Issues = "https://github.com/Genious07/memvault/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["memcore*"]
+include = ["memvault*"]
 
 [tool.black]
 line-length = 88

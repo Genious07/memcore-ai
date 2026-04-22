@@ -1,9 +1,9 @@
 import pytest
 
-import memcore
-from memcore import MemCore
-from memcore.extractors.rules import RulesExtractor
-from memcore.storage.sqlite import SQLiteStorage
+import memvault
+from memvault import MemCore
+from memvault.extractors.rules import RulesExtractor
+from memvault.storage.sqlite import SQLiteStorage
 
 
 @pytest.fixture
@@ -26,7 +26,7 @@ def test_context_manager(tmp_path):
 
 
 def test_version():
-    assert memcore.__version__ == "0.1.0"
+    assert memvault.__version__ == "0.1.0"
 
 
 def test_custom_extractor(tmp_path):
